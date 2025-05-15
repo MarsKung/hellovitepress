@@ -34,6 +34,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: my-vuepress-site/package-lock.json
       
       - name: 設置 Pages
         uses: actions/configure-pages@v4
