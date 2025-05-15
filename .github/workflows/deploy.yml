@@ -1,68 +1,65 @@
-# Sample workflow for building and deploying a VitePress site to GitHub Pages
-#
-name: Deploy VitePress site to Pages
+# 建立並部署 VitePress 網站到 GitHub Pages 的工作流程
+name: 部署 VitePress 網站到 Pages
 
 on:
-  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
-  # using the `master` branch as the default branch.
+  # 當推送到 main 分支時執行
   push:
     branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
+  # 允許從 Actions 頁面手動觸發
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# 設置 GITHUB_TOKEN 的權限以允許部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# 限制同時只能有一個部署進行，但不取消進行中的部署
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # 構建任務
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 檢出代碼
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Not needed if lastUpdated is not enabled
-      # - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm
-      #   with:
-      #     version: 9 # Not needed if you've set "packageManager" in package.json
-      # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
-      - name: Setup Node
+          fetch-depth: 0 # 如果不使用 lastUpdated 功能可以移除這一行
+      
+      - name: 設置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm # or pnpm / yarn
-      - name: Setup Pages
+          cache: npm
+      
+      - name: 設置 Pages
         uses: actions/configure-pages@v4
-      - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
-      - name: Change directory
-        run: cd my-vuepress-site # Change to your VitePress site directory
-      - name: Build with VitePress
-        run: npm run build # or pnpm docs:build / yarn docs:build / bun run docs:build
-      - name: Upload artifact
+      
+      - name: 安裝依賴
+        working-directory: ./my-vuepress-site
+        run: npm ci
+      
+      - name: 構建 VitePress 站點
+        working-directory: ./my-vuepress-site
+        run: npm run build
+      
+      - name: 上傳構建產物
         uses: actions/upload-pages-artifact@v3
         with:
           path: my-vuepress-site/docs/.vitepress/dist
-
-  # Deployment job
+  
+  # 部署任務
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
-    name: Deploy
+    name: 部署
     steps:
-      - name: Deploy to GitHub Pages
+      - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
