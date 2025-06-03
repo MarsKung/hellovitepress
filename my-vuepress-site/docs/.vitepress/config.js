@@ -31,11 +31,6 @@ export default {
           items: [
             { text: '3.1 Web 基礎概念', link: '/3.1' }
           ]
-        },
-        {
-          items: [
-            { text: 'Writeup', link: '/Writeup' }
-          ]
         }
       ],
 
