@@ -1,7 +1,7 @@
 export default {
     title: 'FUIYOO',
     description: '這是一個使用VitePress構建的網站',
-    base: '/hellovitepress/',
+    base: '/',
     themeConfig: {
       nav: [
       ],
@@ -30,11 +30,6 @@ export default {
           text: '第三章：Web',
           items: [
             { text: '3.1 Web 基礎概念', link: '/3.1' }
-          ]
-        },
-        {
-          items: [
-            { text: 'Writeup', link: '/Writeup' }
           ]
         }
       ],
