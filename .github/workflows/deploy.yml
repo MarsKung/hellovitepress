@@ -34,23 +34,23 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: intro_to_cyber/package-lock.json
+          cache-dependency-path: my-vuepress-site/package-lock.json
       
       - name: 設置 Pages
         uses: actions/configure-pages@v4
       
       - name: 安裝依賴
-        working-directory: ./intro_to_cyber
+        working-directory: ./my-vuepress-site
         run: npm ci
       
       - name: 構建 VitePress 站點
-        working-directory: ./intro_to_cyber
+        working-directory: ./my-vuepress-site
         run: npm run build
       
       - name: 上傳構建產物
         uses: actions/upload-pages-artifact@v3
         with:
-          path: intro_to_cyber/docs/.vitepress/dist
+          path: my-vuepress-site/docs/.vitepress/dist
   
   # 部署任務
   deploy:
