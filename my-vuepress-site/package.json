@@ -32,7 +32,6 @@
     "esbuild": "^0.21.5",
     "estree-walker": "^2.0.2",
     "focus-trap": "^7.6.4",
-    "fsevents": "^2.3.3",
     "hast-util-to-html": "^9.0.5",
     "hast-util-whitespace": "^3.0.0",
     "hookable": "^5.5.3",
