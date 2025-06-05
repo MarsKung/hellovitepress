@@ -1,7 +1,7 @@
 export default {
     title: 'FUIYOO',
     description: '這是一個使用VitePress構建的網站',
-    base: '/hellovitepress/',
+    base: '/',
     themeConfig: {
       nav: [
       ],
